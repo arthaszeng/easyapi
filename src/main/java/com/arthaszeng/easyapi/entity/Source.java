@@ -15,7 +15,7 @@ public class Source {
 
     private String description;
 
-    protected Source() {
+    public Source() {
     }
 
     public Source(String code, String description) {

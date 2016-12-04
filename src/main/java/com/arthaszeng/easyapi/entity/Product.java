@@ -23,7 +23,7 @@ public class Product {
     @JoinColumn(name = "source_id")
     private Source source;
 
-    protected Product() {
+    public Product() {
     }
 
     public String getId() {

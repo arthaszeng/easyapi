@@ -15,7 +15,7 @@ public class Category {
 
     private String detailedDescription;
 
-    protected Category() {
+    public Category() {
     }
 
     public Category(String description, String detailedDescription) {
