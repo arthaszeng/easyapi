@@ -17,6 +17,7 @@ public class Product {
     @JoinColumn
     private String sourceId;
 
+
     private String categoryId;
 
     protected Product() {}

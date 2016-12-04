@@ -20,21 +20,20 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .ignoredParameterTypes()
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.arthaszeng.categoryapi"))
+                .apis(RequestHandlerSelectors.basePackage("com.arthaszeng.easyapi"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo("Product CategoryEntity API",
-                "Spring boot + swagger + mybatis",
+                "Supported by com.arthaszeng.easyapi which contributed by Arthas Zeng",
                 "1.0",
                 "",
                 new Contact("Arthas Zeng", "", ""),
                 "",
                 ""
         );
-
         return apiInfo;
     }
 

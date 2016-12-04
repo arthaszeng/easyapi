@@ -1,11 +1,12 @@
 package com.arthaszeng.easyapi.repository;
 
+import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, String> {
+public interface CategoryRepository extends CrudRepository<Category, String> {
 
-    Product findById(String id);
+    Category findByCategoryId(String categoryId);
 }
