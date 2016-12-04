@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Product findCategoryByProductId(String productId) {
-        return productRepository.findById(productId);
+        return productRepository.findProductById(productId);
     }
 
     @Override
