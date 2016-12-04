@@ -21,22 +21,19 @@ public class CategoryController {
     @RequestMapping("/product/{productId}")
     @ApiOperation(notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
     public Product queryProduct(@PathVariable @ApiParam String productId) {
-        Product product = categoryService.findCategoryByProductId(productId);
-        return product;
+        return categoryService.findCategoryByProductId(productId);
     }
 
     @RequestMapping("/category/{categoryId}")
     @ApiOperation(notes = "Get Category Details Via Querying Category ID", value = "Category ID", httpMethod = "GET")
     public Category queryCategory(@PathVariable @ApiParam String categoryId) {
-        Category category = categoryService.findCategoryByCategoryId(categoryId);
-        return category;
+        return categoryService.findCategoryByCategoryId(categoryId);
     }
 
     @RequestMapping("/source/{sourceId}")
-    @ApiOperation(notes = "Get source Details Via Querying source ID", value = "source ID", httpMethod = "GET")
+    @ApiOperation(notes = "Get source Details Via Querying Source ID", value = "Source ID", httpMethod = "GET")
     public Source querysource(@PathVariable @ApiParam String sourceId) {
-        Source source = categoryService.findSourceBySourceId(sourceId);
-        return source;
+        return categoryService.findSourceBySourceId(sourceId);
     }
 
 

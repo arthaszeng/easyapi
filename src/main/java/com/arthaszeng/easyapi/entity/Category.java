@@ -3,7 +3,7 @@ package com.arthaszeng.easyapi.entity;
 import javax.persistence.*;
 
 
-@Entity()
+@Entity
 @Table(name = "category")
 public class Category {
 

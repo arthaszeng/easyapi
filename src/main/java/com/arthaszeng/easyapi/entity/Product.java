@@ -13,7 +13,7 @@ public class Product {
     private String id;
 
     @Column(name = "product_group")
-    private String product_group;
+    private String productGroup;
 
     @ManyToOne()
     @JoinColumn(name = "category_id")
@@ -34,12 +34,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getProduct_group() {
-        return product_group;
+    public String getProductGroup() {
+        return productGroup;
     }
 
-    public void setProduct_group(String product_group) {
-        this.product_group = product_group;
+    public void setProductGroup(String productGroup) {
+        this.productGroup = productGroup;
     }
 
     public Category getCategory() {
@@ -66,7 +66,7 @@ public class Product {
 //    @GeneratedValue(strategy=GenerationType.AUTO)
 //    private String id;
 //
-//    private String product_group;
+//    private String productGroup;
 //
 //    private String sourceId;
 //
@@ -74,8 +74,8 @@ public class Product {
 //
 //    protected Product() {}
 //
-//    public Product(String product_group, String sourceId, String categoryId) {
-//        this.product_group = product_group;
+//    public Product(String productGroup, String sourceId, String categoryId) {
+//        this.productGroup = productGroup;
 //        this.sourceId = sourceId;
 //        this.categoryId = categoryId;
 //    }
@@ -83,8 +83,8 @@ public class Product {
 //    @Override
 //    public String toString() {
 //        return String.format(
-//                "Product[id='%s', product_group='%s', sourceId='%s', categoryId='%s']",
-//                id, product_group, sourceId, categoryId);
+//                "Product[id='%s', productGroup='%s', sourceId='%s', categoryId='%s']",
+//                id, productGroup, sourceId, categoryId);
 //    }
 //
 //    public String getCategoryId() {
@@ -95,8 +95,8 @@ public class Product {
 //		return id;
 //	}
 //
-//	public String getProduct_group() {
-//		return product_group;
+//	public String getProductGroup() {
+//		return productGroup;
 //	}
 //
 //	public String getSourceId() {
