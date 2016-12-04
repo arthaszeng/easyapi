@@ -2,11 +2,13 @@ package com.arthaszeng.easyapi.controller;
 
 import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
+import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,4 +32,13 @@ public class CategoryController {
         Category category = categoryService.findCategoryByCategoryId(categoryId);
         return category;
     }
+    
+    @RequestMapping("/source/{sourceId}")
+    @ApiOperation(notes="Get source Details Via Querying source ID",value="source ID",httpMethod="GET")
+    public Source querysource(@PathVariable @ApiParam String sourceId) {
+        Source source = categoryService.findSourceBySourceId(sourceId);
+        return source;
+    }
+    
+    
 }
