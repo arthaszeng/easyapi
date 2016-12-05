@@ -3,7 +3,7 @@ package com.arthaszeng.easyapi.controller;
 import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
 import com.arthaszeng.easyapi.entity.Source;
-import com.arthaszeng.easyapi.service.CategoryService;
+import com.arthaszeng.easyapi.service.categoryservice.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

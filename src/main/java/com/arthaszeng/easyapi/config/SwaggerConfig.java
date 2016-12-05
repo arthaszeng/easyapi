@@ -26,7 +26,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("Product CategoryEntity API",
+        return new ApiInfo("Product CategoryEntity API",
                 "Supported by com.arthaszeng.easyapi which contributed by Arthas Zeng",
                 "1.0",
                 "",
@@ -34,7 +34,6 @@ public class SwaggerConfig {
                 "",
                 ""
         );
-        return apiInfo;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.arthaszeng.easyapi.service.implement;
+package com.arthaszeng.easyapi.service.categoryservice;
 
 import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
@@ -6,7 +6,6 @@ import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.repository.CategoryRepository;
 import com.arthaszeng.easyapi.repository.ProductRepository;
 import com.arthaszeng.easyapi.repository.SourceRepository;
-import com.arthaszeng.easyapi.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

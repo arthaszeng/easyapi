@@ -9,6 +9,7 @@ import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
 import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.repository.ProductRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class CustomerRepositoryTests {
     @Autowired
     private ProductRepository customers;
 
+    @Ignore
     @Test
     public void testFindByLastName() {
         Product product = new Product();
