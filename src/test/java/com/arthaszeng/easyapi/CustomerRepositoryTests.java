@@ -1,5 +1,4 @@
-
-package com;
+package com.arthaszeng.easyapi;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
