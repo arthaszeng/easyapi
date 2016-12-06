@@ -13,16 +13,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    @Autowired
-    SourceRepository sourceRepository;
-
     @Override
     public Product findCategoryByProductId(String productId) {
         return productRepository.findProductById(productId);
-    }
-
-    @Override
-    public Source findSourceBySourceId(String sourceId) {
-        return sourceRepository.findBySourceId(sourceId);
     }
 }

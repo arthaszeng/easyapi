@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class SourceServiceImpl implements SourceService {
     @Autowired
-    ProductRepository productRepository;
-
-    @Autowired
     SourceRepository sourceRepository;
 
     @Override
