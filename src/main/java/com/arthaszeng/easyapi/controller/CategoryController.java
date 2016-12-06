@@ -43,7 +43,7 @@ public class CategoryController {
     @RequestMapping("/source/{sourceId}")
     @ApiOperation(notes = "Get source Details Via Querying Source ID", value = "Source ID", httpMethod = "GET")
     public Source querySource(@PathVariable @ApiParam String sourceId) {
-        return sourceService
+        return sourceService.findSourceBySourceId(sourceId);
     }
 
 
