@@ -53,18 +53,20 @@ public class CategoryController {
 
     @RequestMapping("/category/add/")
     @ApiOperation(value = "Category", notes = "Add Category Details", httpMethod = "POST")
-    public Category addCategory(
+    public List<Category> addCategory(
             @RequestParam(name = "description") @ApiParam String description,
             @RequestParam @ApiParam String detailedDescription) {
 
-        Category categories = new Category(description, detailedDescription);
+        List<Category> categories = new ArrayList<>();
+        Category category = new Category(description, detailedDescription);
+        categories.add(category);
         return categoryService.addCategory(categories);
     }
 
     @RequestMapping("/product/add/")
     @ApiOperation(value = "product", notes = "Add Product Details", httpMethod = "POST")
-    public Category addCategory(
-            @RequestParam(name = "productGroup") @ApiParam String productgroup,
+    public List<Product> addCategory(
+            @RequestParam(name = "productGroup") @ApiParam String productGroup,
             @RequestParam(name = "sourceId") @ApiParam Long sourceId,
             @RequestParam(name = "categoryId") @ApiParam Long categoryId) {
 
@@ -73,8 +75,9 @@ public class CategoryController {
         Category category = categoryService.findCategoryByCategoryId(categoryId);
         Source source = sourceService.findSourceBySourceId(sourceId);
 
+        products.add(new Product(productGroup, category, source));
 
-        return null;
+        return productService.addProduct(products);
     }
     
 }
