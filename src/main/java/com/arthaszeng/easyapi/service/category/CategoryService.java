@@ -1,8 +1,6 @@
 package com.arthaszeng.easyapi.service.category;
 
 import com.arthaszeng.easyapi.entity.Category;
-import com.arthaszeng.easyapi.entity.Product;
-import com.arthaszeng.easyapi.entity.Source;
 
 import java.util.List;
 
