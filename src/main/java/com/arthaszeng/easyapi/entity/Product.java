@@ -21,7 +21,10 @@ public class Product {
     @JoinColumn(name = "source_id")
     private Source source;
 
-    public Product() {
+    public Product(String productGroup, Category category, Source source) {
+        this.productGroup = productGroup;
+        this.category = category;
+        this.source = source;
     }
 
     public Long getId() {

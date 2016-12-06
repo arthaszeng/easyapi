@@ -13,12 +13,12 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> findCategoryByCategoryId(Long categoryId) {
+    public Category findCategoryByCategoryId(Long categoryId) {
         return categoryRepository.findByCategoryId(categoryId);
     }
 
     @Override
-    public Category addCategory(Category categoryList) {
+    public List<Category> addCategory(List<Category> categoryList) {
         return categoryRepository.save(categoryList);
     }
 }

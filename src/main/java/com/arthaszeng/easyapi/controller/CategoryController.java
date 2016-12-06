@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Api(value = "Category API")
@@ -40,7 +41,7 @@ public class CategoryController {
 
     @RequestMapping("/category/{categoryId}")
     @ApiOperation(notes = "Get Category Details Via Querying Category ID", value = "Category ID", httpMethod = "GET")
-    public List<Category> queryCategory(@PathVariable @ApiParam Long categoryId) {
+    public Category queryCategory(@PathVariable @ApiParam Long categoryId) {
         return categoryService.findCategoryByCategoryId(categoryId);
     }
 
@@ -60,5 +61,20 @@ public class CategoryController {
         return categoryService.addCategory(categories);
     }
 
+    @RequestMapping("/product/add/")
+    @ApiOperation(value = "product", notes = "Add Product Details", httpMethod = "POST")
+    public Category addCategory(
+            @RequestParam(name = "productGroup") @ApiParam String productgroup,
+            @RequestParam(name = "sourceId") @ApiParam Long sourceId,
+            @RequestParam(name = "categoryId") @ApiParam Long categoryId) {
 
+        List<Product> products = new ArrayList<>();
+
+        Category category = categoryService.findCategoryByCategoryId(categoryId);
+        Source source = sourceService.findSourceBySourceId(sourceId);
+
+
+        return null;
+    }
+    
 }
