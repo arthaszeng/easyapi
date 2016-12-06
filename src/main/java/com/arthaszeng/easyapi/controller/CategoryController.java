@@ -5,6 +5,7 @@ import com.arthaszeng.easyapi.entity.Product;
 import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.service.category.CategoryService;
 import com.arthaszeng.easyapi.service.product.ProductService;
+import com.arthaszeng.easyapi.service.sourceService.SourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -24,6 +25,9 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    SourceService sourceService;
+
     @RequestMapping("/product/{productId}")
     @ApiOperation(notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
     public Product queryProduct(@PathVariable @ApiParam String productId) {
@@ -39,7 +43,7 @@ public class CategoryController {
     @RequestMapping("/source/{sourceId}")
     @ApiOperation(notes = "Get source Details Via Querying Source ID", value = "Source ID", httpMethod = "GET")
     public Source querySource(@PathVariable @ApiParam String sourceId) {
-        return productService.findSourceBySourceId(sourceId);
+        return sourceService
     }
 
 
