@@ -6,9 +6,7 @@ import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.service.category.CategoryService;
 import com.arthaszeng.easyapi.service.product.ProductService;
 import com.arthaszeng.easyapi.service.sourceService.SourceService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +27,9 @@ public class CategoryController {
     SourceService sourceService;
 
     @RequestMapping("/product/{productId}")
-    @ApiOperation(notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
+    @ApiOperation(
+            notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
+    @ApiImplicitParam(name = "header", value = "pass", required = false, dataType = "String")
     public Product queryProduct(@PathVariable @ApiParam String productId) {
         return productService.findCategoryByProductId(productId);
     }
