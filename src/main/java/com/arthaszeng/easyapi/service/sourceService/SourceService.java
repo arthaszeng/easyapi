@@ -5,6 +5,6 @@ import com.arthaszeng.easyapi.entity.Source;
 
 public interface SourceService {
 
-    Source findSourceBySourceId(String sourceId);
+    Source findSourceBySourceId(Long sourceId);
 
 }

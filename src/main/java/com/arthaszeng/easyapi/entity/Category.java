@@ -1,6 +1,9 @@
 package com.arthaszeng.easyapi.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
@@ -8,8 +11,8 @@ import javax.persistence.*;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String categoryId;
+    @GeneratedValue
+    private Long categoryId;
 
     private String description;
 
@@ -23,11 +26,11 @@ public class Category {
         this.detailedDescription = detailedDescription;
     }
 
-    public String getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

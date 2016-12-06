@@ -5,5 +5,5 @@ import com.arthaszeng.easyapi.entity.Source;
 
 public interface ProductService {
 
-    Product findCategoryByProductId(String productId);
+    Product findCategoryByProductId(Long productId);
 }

@@ -9,7 +9,7 @@ public class Source {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String sourceId;
+    private Long sourceId;
 
     private String code;
 
@@ -23,11 +23,11 @@ public class Source {
         this.description = description;
     }
 
-    public String getsourceId() {
+    public Long getsourceId() {
         return sourceId;
     }
 
-    public void setsourceId(String sourceId) {
+    public void setsourceId(Long sourceId) {
         this.sourceId = sourceId;
     }
 

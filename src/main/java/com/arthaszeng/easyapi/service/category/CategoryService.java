@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CategoryService {
 
-    List<Category> findCategoryByCategoryId(String categoryId);
+    List<Category> findCategoryByCategoryId(Long categoryId);
 
+    Category addCategory(Category categoryList);
 }
