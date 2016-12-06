@@ -1,15 +1,12 @@
-package com.arthaszeng.easyapi.service.categoryservice;
+package com.arthaszeng.easyapi.service.product;
 
-import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
 import com.arthaszeng.easyapi.entity.Source;
 
-public interface CategoryService {
+public interface ProductService {
 
     Product findCategoryByProductId(String productId);
 
-    Category findCategoryByCategoryId(String categoryId);
-    
     Source findSourceBySourceId(String sourceId);
 
 }

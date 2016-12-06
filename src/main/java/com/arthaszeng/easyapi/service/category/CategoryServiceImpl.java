@@ -1,4 +1,4 @@
-package com.arthaszeng.easyapi.service.categoryservice;
+package com.arthaszeng.easyapi.service.category;
 
 import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
@@ -9,29 +9,15 @@ import com.arthaszeng.easyapi.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
-    ProductRepository productRepository;
-
-    @Autowired
     CategoryRepository categoryRepository;
 
-    @Autowired
-    SourceRepository sourceRepository;
-
     @Override
-    public Product findCategoryByProductId(String productId) {
-        return productRepository.findProductById(productId);
-    }
-
-    @Override
-    public Category findCategoryByCategoryId(String categoryId) {
+    public List<Category> findCategoryByCategoryId(String categoryId) {
         return categoryRepository.findByCategoryId(categoryId);
-    }
-
-    @Override
-    public Source findSourceBySourceId(String sourceId) {
-        return sourceRepository.findBySourceId(sourceId);
     }
 }
