@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 public class FinalErrorController implements ErrorController {
 
     @RequestMapping(value = "/error")
-    public ErrorInfo error(HttpServletResponse resp, HttpServletRequest req) {
+    public ErrorInfo error(HttpServletResponse resp, HttpServletRequest req) throws Exception {
         ErrorInfo errorInfo = new ErrorInfo();
 
         errorInfo.setCode(resp.getStatus());
-        errorInfo.setData("data");
-        errorInfo.setMessage("message");
+        errorInfo.setData("DATA PLACEHOLDER");
+        errorInfo.setMessage("MESSAGE PLACEHOLDER");
         errorInfo.setUrl(req.getRequestURL().toString());
 
         return errorInfo;
