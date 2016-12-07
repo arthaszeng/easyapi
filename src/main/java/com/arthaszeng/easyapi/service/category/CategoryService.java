@@ -8,5 +8,5 @@ public interface CategoryService {
 
     Category findCategoryByCategoryId(Long categoryId);
 
-    List<Category> addCategory(List<Category> categoryList);
+    Category addCategory(Category category);
 }

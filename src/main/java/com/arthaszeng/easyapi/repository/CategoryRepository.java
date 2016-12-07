@@ -11,5 +11,5 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     Category findByCategoryId(Long categoryId);
 
-    List<Category> save(List<Category> category);
+    Category save(Category category);
 }

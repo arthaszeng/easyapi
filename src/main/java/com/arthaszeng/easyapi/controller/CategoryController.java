@@ -51,33 +51,37 @@ public class CategoryController {
         return sourceService.findSourceBySourceId(sourceId);
     }
 
-    @RequestMapping("/category/add/")
+    @RequestMapping("/category/add")
     @ApiOperation(value = "Category", notes = "Add Category Details", httpMethod = "POST")
-    public List<Category> addCategory(
+    public Category addCategory(
             @RequestParam(name = "description") @ApiParam String description,
             @RequestParam @ApiParam String detailedDescription) {
 
-        List<Category> categories = new ArrayList<>();
         Category category = new Category(description, detailedDescription);
-        categories.add(category);
-        return categoryService.addCategory(categories);
+        return categoryService.addCategory(category);
     }
 
-    @RequestMapping("/product/add/")
-    @ApiOperation(value = "product", notes = "Add Product Details", httpMethod = "POST")
-    public List<Product> addCategory(
+    @RequestMapping("/product/add")
+    @ApiOperation(value = "product", notes = "Add Product", httpMethod = "POST")
+    public Product addCategory(
             @RequestParam(name = "productGroup") @ApiParam String productGroup,
             @RequestParam(name = "sourceId") @ApiParam Long sourceId,
             @RequestParam(name = "categoryId") @ApiParam Long categoryId) {
 
-        List<Product> products = new ArrayList<>();
-
         Category category = categoryService.findCategoryByCategoryId(categoryId);
         Source source = sourceService.findSourceBySourceId(sourceId);
-
-        products.add(new Product(productGroup, category, source));
-
-        return productService.addProduct(products);
+        Product product = new Product(productGroup, category, source);
+        return productService.addProduct(product);
     }
-    
+
+    @RequestMapping("/source/add")
+    @ApiOperation(value = "Source", notes = "Add Source", httpMethod = "POST", protocols = "app")
+    public Source addSource(
+            @RequestParam(name = "code") @ApiParam String code,
+            @RequestParam(name = "description") @ApiParam String description) {
+
+        Source source = new Source(code, description);
+
+        return sourceService.addSource(source);
+    }
 }

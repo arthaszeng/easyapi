@@ -5,8 +5,6 @@ import com.arthaszeng.easyapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
@@ -18,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> addProduct(List<Product> products) {
-        return productRepository.save(products);
+    public Product addProduct(Product product) {
+        return productRepository.save(product);
     }
 }

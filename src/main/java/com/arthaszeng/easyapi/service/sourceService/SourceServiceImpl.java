@@ -1,11 +1,11 @@
 package com.arthaszeng.easyapi.service.sourceService;
 
-import com.arthaszeng.easyapi.entity.Product;
 import com.arthaszeng.easyapi.entity.Source;
-import com.arthaszeng.easyapi.repository.ProductRepository;
 import com.arthaszeng.easyapi.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SourceServiceImpl implements SourceService {
@@ -15,5 +15,10 @@ public class SourceServiceImpl implements SourceService {
     @Override
     public Source findSourceBySourceId(Long sourceId) {
         return sourceRepository.findBySourceId(sourceId);
+    }
+
+    @Override
+    public Source addSource(Source source) {
+        return sourceRepository.save(source);
     }
 }

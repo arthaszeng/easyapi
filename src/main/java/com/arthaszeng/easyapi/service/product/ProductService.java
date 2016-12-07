@@ -8,5 +8,5 @@ public interface ProductService {
 
     Product findCategoryByProductId(Long productId);
 
-    List<Product> addProduct(List<Product> products);
+    Product addProduct(Product product);
 }
