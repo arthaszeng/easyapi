@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "product")
-public class Product extends Throwable {
+public class Product {
 
     @Id
     @GeneratedValue()

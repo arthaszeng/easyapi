@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "category")
-public class Category extends Throwable {
+public class Category {
 
     @Id
     @GeneratedValue
