@@ -18,7 +18,6 @@ public class HeaderFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest servletRequest = (HttpServletRequest) request;
-        servletRequest.getHeader("header");
 
         chain.doFilter(request, response);
     }
