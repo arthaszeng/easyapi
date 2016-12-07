@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "source")
-public class Source {
+public class Source extends Throwable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
