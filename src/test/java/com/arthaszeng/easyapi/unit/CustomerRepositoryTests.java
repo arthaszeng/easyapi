@@ -1,8 +1,6 @@
-package com.arthaszeng.easyapi;
+package com.arthaszeng.easyapi.unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
 
 import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;

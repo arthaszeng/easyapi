@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private Long id;
 
     @Column(name = "product_group")

@@ -7,8 +7,8 @@ import com.arthaszeng.easyapi.exception.DatabaseException;
 import com.arthaszeng.easyapi.service.category.CategoryService;
 import com.arthaszeng.easyapi.service.product.ProductService;
 import com.arthaszeng.easyapi.service.sourceService.SourceService;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,31 +31,28 @@ public class CategoryController {
     private SourceService sourceService;
 
     @RequestMapping("/product/{productId}")
-    @ApiOperation(
-            notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
-    @ApiImplicitParam(name = "header", value = "pass", required = false, dataType = "String")
-    public Product queryProduct(@PathVariable Long productId) {
+    @ApiOperation(notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
+    public Product queryProduct(@PathVariable @ApiParam Long productId) {
         return productService.findCategoryByProductId(productId);
     }
 
     @RequestMapping("/category/{categoryId}")
     @ApiOperation(notes = "Get Category Details Via Querying Category ID", value = "Category ID", httpMethod = "GET")
-    public Category queryCategory(@PathVariable Long categoryId) {
+    public Category queryCategory(@PathVariable @ApiParam Long categoryId) {
         return categoryService.findCategoryByCategoryId(categoryId);
     }
 
     @RequestMapping("/source/{sourceId}")
     @ApiOperation(notes = "Get source Details Via Querying Source ID", value = "Source ID", httpMethod = "GET")
-    public Source querySource(@PathVariable Long sourceId) {
+    public Source querySource(@PathVariable @ApiParam Long sourceId) {
         return sourceService.findSourceBySourceId(sourceId);
     }
 
     @RequestMapping("/category/add")
     @ApiOperation(value = "Category", notes = "Add Category Details", httpMethod = "POST")
     public Category addCategory(
-            @RequestParam(name = "description") String description,
-            @RequestParam String detailedDescription) {
-
+            @RequestParam(name = "description") @ApiParam String description,
+            @RequestParam @ApiParam("detailed description") String detailedDescription) {
         Category category = new Category(description, detailedDescription);
         return categoryService.addCategory(category);
     }
@@ -63,20 +60,21 @@ public class CategoryController {
     @RequestMapping("/product/add")
     @ApiOperation(value = "product", notes = "Add Product", httpMethod = "POST")
     public Product addCategory(
-            @RequestParam(name = "productGroup") String productGroup,
-            @RequestParam(name = "sourceId") Long sourceId,
-            @RequestParam(name = "categoryId") Long categoryId) {
+            @RequestParam(name = "productGroup") @ApiParam String productGroup,
+            @RequestParam(name = "sourceId") @ApiParam Long sourceId,
+            @RequestParam(name = "categoryId") @ApiParam Long categoryId) {
 
         Category category = categoryService.findCategoryByCategoryId(categoryId);
         Source source = sourceService.findSourceBySourceId(sourceId);
         Product product = new Product(productGroup, category, source);
         return productService.addProduct(product);
     }
+
     @RequestMapping("/source/add")
     @ApiOperation(value = "Source", notes = "Add Source", httpMethod = "POST", protocols = "app")
     public Source addSource(
-            @RequestParam(name = "code") String code,
-            @RequestParam(name = "description") String description) throws DatabaseException {
+            @RequestParam(name = "code") @ApiParam String code,
+            @RequestParam(name = "description") @ApiParam String description) throws DatabaseException {
 
         Source source = null;
 
