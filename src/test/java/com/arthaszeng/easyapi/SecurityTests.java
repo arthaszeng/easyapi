@@ -1,5 +1,6 @@
 package com.arthaszeng.easyapi;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class SecurityTests {
     @Autowired
     private MockMvc mockMvc;
 
+    @Ignore
     @Test
     public void loginWithValidUserThenAuthenticated() throws Exception {
         FormLoginRequestBuilder login = formLogin()
@@ -34,6 +36,7 @@ public class SecurityTests {
             .andExpect(authenticated().withUsername("user"));
     }
 
+    @Ignore
     @Test
     public void loginWithInvalidUserThenUnauthenticated() throws Exception {
         FormLoginRequestBuilder login = formLogin()
@@ -44,6 +47,7 @@ public class SecurityTests {
             .andExpect(unauthenticated());
     }
 
+    @Ignore
     @Test
     public void accessSecuredResourceUnauthenticatedThenRedirectsToLogin() throws Exception {
         mockMvc.perform(get("/product"))

@@ -33,7 +33,7 @@ public class CustomerRepositoryTests {
         Product product = new Product();
         Category category = new Category();
         Source source = new Source();
-        product.setId("1");
+        product.setId(1L);
         product.setProductGroup("SOURCE_GROUP");
         product.setCategory(category);
         product.setSource(source);
