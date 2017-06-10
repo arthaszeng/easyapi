@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,13 +32,14 @@ public class CategoryController {
 
     @RequestMapping("/category/add")
     @ApiOperation(value = "Category", notes = "Add Category Details", httpMethod = "POST")
-    public Category addCategory(@RequestParam(name = "description") @ApiParam String description,
-                                @RequestParam @ApiParam("detailed description") String detailedDescription) {
+    public ResponseEntity<Category> addCategory(@RequestParam(name = "description") @ApiParam String description,
+                                                @RequestParam @ApiParam("detailed description") String detailedDescription) {
 
 
         if (validateAddParams(description, detailedDescription)) {
             Category category = new Category(description, detailedDescription);
-            return categoryService.addCategory(category);
+            Category insertedCategory = categoryService.addCategory(category);
+            return new ResponseEntity<>(insertedCategory, OK);
         } else {
             return null;
         }
