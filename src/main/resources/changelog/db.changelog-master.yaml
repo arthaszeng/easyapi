@@ -1,0 +1,121 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: cwzeng
+      changes:
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: category_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: detailed_description
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: cwzeng
+      changes:
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: description
+                  value: CATE_DESCRIPTION1
+              - column:
+                  name: detailed_description
+                  value: DET_DESCRIPTION_1
+  - changeSet:
+      id: 3
+      author: cwzeng
+      changes:
+        - createTable:
+            tableName: source
+            columns:
+              - column:
+                  name: source_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 4
+      author: cwzeng
+      changes:
+        - insert:
+            tableName: source
+            columns:
+              - column:
+                  name: code
+                  value: SOURCE_CODE_1
+              - column:
+                  name: description
+                  value: SRC_CODE_DSC_1
+  - changeSet:
+      id: 5
+      author: cwzeng
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: product_group
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 6
+      author: cwzeng
+      changes:
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: product_group
+                  value: BANKING
+              - column:
+                  name: category_id
+                  value: 1
+              - column:
+                  name: source_id
+                  value: 1
+
