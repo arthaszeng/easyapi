@@ -49,10 +49,7 @@ public class CategoryController {
         return description != null && detailedDescription != null;
     }
 
-
     private boolean validateQueryParams(Long categoryId) {
         return categoryId > 0L;
     }
-
-
 }
