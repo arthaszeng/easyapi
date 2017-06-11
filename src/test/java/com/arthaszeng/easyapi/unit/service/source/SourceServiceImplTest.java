@@ -2,6 +2,7 @@ package com.arthaszeng.easyapi.unit.service.source;
 
 import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.service.sourceService.SourceService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,19 @@ public class SourceServiceImplTest {
     @Autowired
     private SourceService sourceService;
 
+    private Source source;
+
+    @Before
+    public void setUp() throws Exception {
+        source = new Source("TEST", "TEST");
+        sourceService.addSource(source);
+    }
+
     @Test
     public void shouldGetASourceById() throws Exception {
-        Source source = sourceService.findSourceBySourceId(1L);
+        Source result = sourceService.findSourceBySourceId(source.getsourceId());
 
-        assertThat(source.getsourceId(), is(1L));
-        assertThat(source.getCode(), is("SOURCE_CODE_1"));
-        assertThat(source.getDescription(), is("SRC_CODE_DSC_1"));
+        assertThat(result.equals(source), is(true));
     }
 
     @Test

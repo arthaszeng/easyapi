@@ -6,6 +6,7 @@ import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.service.category.CategoryService;
 import com.arthaszeng.easyapi.service.product.ProductService;
 import com.arthaszeng.easyapi.service.sourceService.SourceService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,22 +33,29 @@ public class ProductServiceImplTest {
     @Autowired
     private SourceService sourceService;
 
+    private Product product;
+
+    @Before
+    public void setUp() throws Exception {
+        Category category = categoryService.addCategory(new Category("TEST", "TEST"));
+        Source source = sourceService.addSource(new Source("TEST", "TEST"));
+        product = new Product("TEST", category, source);
+
+        productService.addProduct(product);
+    }
+
     @Test
     public void shouldQueryAProductById() throws Exception {
-        Product product = productService.findCategoryByProductId(1L);
+        Product result = productService.findCategoryByProductId(product.getId());
 
-        assertThat(product.getId(), is(1L));
-        assertThat(product.getCategory().equals(categoryService.findCategoryByCategoryId(1L)), is(true));
-        assertThat(product.getSource().equals(sourceService.findSourceBySourceId(1L)), is(true));
-        assertThat(product.getProductGroup(), is("BANKING"));
-
+        assertThat(result.equals(product), is(true));
     }
 
     @Test
     public void shouldAddAProduct() throws Exception {
-        Category category = new Category("test", "test");
-        Source source = new Source("test", "test");
-        Product product = new Product("test", category, source);
+        Category category = new Category("TEST", "TEST");
+        Source source = new Source("TEST", "TEST");
+        Product product = new Product("TEST", category, source);
 
         categoryService.addCategory(category);
         sourceService.addSource(source);
@@ -55,9 +63,6 @@ public class ProductServiceImplTest {
 
         Product insertedProduct = productService.findCategoryByProductId(product.getId());
 
-        assertThat(insertedProduct.getId(), is(product.getId()));
-        assertThat(insertedProduct.getProductGroup(), is(product.getProductGroup()));
-        assertThat(insertedProduct.getCategory().equals(category), is(true));
-        assertThat(insertedProduct.getSource().equals(source), is(true));
+        assertThat(insertedProduct.equals(product), is(true));
     }
 }
