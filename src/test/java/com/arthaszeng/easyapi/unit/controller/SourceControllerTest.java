@@ -14,10 +14,10 @@ public class SourceControllerTest {
     private SourceController sourceController;
     private SourceService sourceService;
 
-    private long VALID_SOURCE_ID = 1L;
-    private long INVALID_SOURCE_ID = -1L;
-    private String DESCRIPTION = "test";
-    private String CODE = "1234";
+    private static final long VALID_SOURCE_ID = 1L;
+    private static final long INVALID_SOURCE_ID = -1L;
+    private static final String DESCRIPTION = "TEST";
+    private static final String CODE = "1234";
 
     @Before
     public void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class SourceControllerTest {
     public void shouldInvokeServiceToQuerySourceWhenIdIsValid() throws Exception {
         sourceController.querySource(VALID_SOURCE_ID);
 
-        verify(sourceService, times(1)).findSourceBySourceId(1L);
+        verify(sourceService, times(1)).findSourceBySourceId(VALID_SOURCE_ID);
     }
 
     @Test

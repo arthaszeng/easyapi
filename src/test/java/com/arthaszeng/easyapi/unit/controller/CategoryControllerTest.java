@@ -11,13 +11,13 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 public class CategoryControllerTest {
+    private static final long VALID_CATEGORY_ID = 1L;
+    private static final long INVALID_CATEGORY_ID = -1L;
+    private static final String DESCRIPTION = "TEST";
+    private static final String DETAILED_DESCRIPTION = "TEST";
+
     private CategoryController categoryController;
     private CategoryService categoryService;
-
-    private long VALID_CATEGORY_ID = 1L;
-    private long INVALID_CATEGORY_ID = -1L;
-    private String DESCRIPTION = "test";
-    private String DETAILED_DESCRIPTION = "test";
 
     @Before
     public void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class CategoryControllerTest {
     public void shouldInvokeServiceToQueryCategoryWhenIdIsValid() throws Exception {
         categoryController.queryCategory(VALID_CATEGORY_ID);
 
-        verify(categoryService, times(1)).findCategoryByCategoryId(1L);
+        verify(categoryService, times(1)).findCategoryByCategoryId(VALID_CATEGORY_ID);
     }
 
     @Test

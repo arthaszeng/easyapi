@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SourceServiceImpl implements SourceService {
     @Autowired
-    SourceRepository sourceRepository;
+    private SourceRepository sourceRepository;
 
     @Override
     public Source findSourceBySourceId(Long sourceId) {

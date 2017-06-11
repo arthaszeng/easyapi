@@ -67,7 +67,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("category.categoryId").value(category.getCategoryId()))
                 .andExpect(jsonPath("category.description").value(category.getDescription()))
                 .andExpect(jsonPath("category.detailedDescription").value(category.getDetailedDescription()))
-                .andExpect(jsonPath("source.sourceId").value(source.getsourceId()))
+                .andExpect(jsonPath("source.sourceId").value(source.getSourceId()))
                 .andExpect(jsonPath("source.code").value(source.getCode()))
                 .andExpect(jsonPath("source.description").value(source.getDescription()));
 
@@ -84,14 +84,14 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(post(
                 format("http://localhost:8081/product/add?productGroup=%s&sourceId=%d&categoryId=%d",
                         PROD_GROUP,
-                        source.getsourceId(),
+                        source.getSourceId(),
                         category.getCategoryId())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("productGroup").value(PROD_GROUP))
                 .andExpect(jsonPath("category.categoryId").value(category.getCategoryId()))
                 .andExpect(jsonPath("category.description").value(category.getDescription()))
                 .andExpect(jsonPath("category.detailedDescription").value(category.getDetailedDescription()))
-                .andExpect(jsonPath("source.sourceId").value(source.getsourceId()))
+                .andExpect(jsonPath("source.sourceId").value(source.getSourceId()))
                 .andExpect(jsonPath("source.code").value(source.getCode()))
                 .andExpect(jsonPath("source.description").value(source.getDescription()));
     }

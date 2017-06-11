@@ -23,11 +23,11 @@ public class Source {
         this.description = description;
     }
 
-    public Long getsourceId() {
+    public Long getSourceId() {
         return sourceId;
     }
 
-    public void setsourceId(Long sourceId) {
+    public void setSourceId(Long sourceId) {
         this.sourceId = sourceId;
     }
 

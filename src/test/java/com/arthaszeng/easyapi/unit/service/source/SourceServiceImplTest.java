@@ -33,18 +33,18 @@ public class SourceServiceImplTest {
 
     @Test
     public void shouldGetASourceById() throws Exception {
-        Source result = sourceService.findSourceBySourceId(source.getsourceId());
+        Source result = sourceService.findSourceBySourceId(source.getSourceId());
 
         assertThat(result.equals(source), is(true));
     }
 
     @Test
     public void shouldAddASource() throws Exception {
-        Source source = new Source("test", "test");
+        Source source = new Source("TEST", "TEST");
 
         sourceService.addSource(source);
 
-        Source insertedSource = sourceService.findSourceBySourceId(source.getsourceId());
+        Source insertedSource = sourceService.findSourceBySourceId(source.getSourceId());
 
         assertThat(insertedSource.equals(source), is(true));
     }

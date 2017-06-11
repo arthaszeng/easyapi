@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /*
-    Add this configuration in case of the Spring can not add mapping of swagger-ui.html automatically
+    Adding this configuration in case of the Spring can not add mapping of swagger-ui.html automatically
  */
 @Configuration
 class WebMvcConfig extends WebMvcConfigurerAdapter {

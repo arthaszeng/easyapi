@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
     @Autowired
-    CategoryController categoryController;
+    private CategoryController categoryController;
 
     @Autowired
     private CategoryRepository categoryRepository;

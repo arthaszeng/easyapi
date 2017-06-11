@@ -9,23 +9,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 public class ProductControllerTest {
+    private static final long VALID_PRODUCT_ID = 1L;
+    private static final long INVALID_PRODUCT_ID = -1L;
+    private static final Long SOURCE_ID = 1L;
+    private static final Long CATEGORY_ID = 1L;
+    private static final Long INVALID_ID = -1L;
+    private static final String PRODUCT_GROUP = "TEST";
+
     private ProductController productController;
     private ProductService productService;
     private SourceService sourceService;
     private CategoryService categoryService;
-
-    private long VALID_PRODUCT_ID = 1L;
-    private long INVALID_PRODUCT_ID = -1L;
-    private String PRODUCT_GROUP = "test";
-    private Long SOURCE_ID = 1L;
-    private Long CATEGORY_ID = 1L;
-    private Long INVALID_ID = -1L;
 
     @Before
     public void setUp() throws Exception {
@@ -44,7 +42,7 @@ public class ProductControllerTest {
     public void shouldInvokeServiceToQueryProductWhenIdIsValid() throws Exception {
         productController.queryProduct(VALID_PRODUCT_ID);
 
-        verify(productService, times(1)).findCategoryByProductId(1L);
+        verify(productService, times(1)).findCategoryByProductId(VALID_PRODUCT_ID);
     }
 
     @Test
