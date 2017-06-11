@@ -13,11 +13,11 @@ public class Product {
     @Column(name = "product_group")
     private String productGroup;
 
-    @ManyToOne()
+    @OneToOne(targetEntity=Category.class)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne()
+    @OneToOne(targetEntity = Source.class)
     @JoinColumn(name = "source_id")
     private Source source;
 
