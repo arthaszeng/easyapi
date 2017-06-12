@@ -35,7 +35,7 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
     public void shouldQueryCategoryByCategoryId() throws Exception {
         Category category = categoryRepository.save(new Category(DESCRIPTION, DETAILED_DESCRIPTION));
 
-        mockMvc.perform(get(format("http://localhost:8081/category/%d", category.getCategoryId())))
+        mockMvc.perform(get(format("http://localhost:8081/categories/%d", category.getCategoryId())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("description").value(DESCRIPTION))
                 .andExpect(jsonPath("detailedDescription").value(DETAILED_DESCRIPTION));
@@ -44,7 +44,7 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     public void shouldAddCategory() throws Exception {
 
-        mockMvc.perform(post(format("http://localhost:8081/category/add?description=%s&detailedDescription=%s", DESCRIPTION, DETAILED_DESCRIPTION)))
+        mockMvc.perform(post(format("http://localhost:8081/categories/category?description=%s&detailedDescription=%s", DESCRIPTION, DETAILED_DESCRIPTION)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("description").value(DESCRIPTION))
                 .andExpect(jsonPath("detailedDescription").value(DETAILED_DESCRIPTION));

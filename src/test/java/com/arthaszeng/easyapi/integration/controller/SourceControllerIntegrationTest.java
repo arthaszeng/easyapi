@@ -38,7 +38,7 @@ public class SourceControllerIntegrationTest extends BaseIntegrationTest {
     public void shouldQuerySourceBySourceId() throws Exception {
         Source source = sourceRepository.save(new Source(CODE, DESCRIPTION));
 
-        mockMvc.perform(get(format("http://localhost:8081/source/%d", source.getSourceId())))
+        mockMvc.perform(get(format("http://localhost:8081/sources/%d", source.getSourceId())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("code").value(CODE))
                 .andExpect(jsonPath("description").value(DESCRIPTION));
@@ -46,7 +46,7 @@ public class SourceControllerIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void shouldAddSource() throws Exception {
-        mockMvc.perform(post(format("http://localhost:8081/source/add?code=%s&description=%s", CODE, DESCRIPTION)))
+        mockMvc.perform(post(format("http://localhost:8081/sources/source?code=%s&description=%s", CODE, DESCRIPTION)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("code").value(CODE))
                 .andExpect(jsonPath("description").value(DESCRIPTION));

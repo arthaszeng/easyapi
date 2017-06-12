@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
+@RequestMapping("/sources")
 public class SourceController {
     @Autowired
     private SourceService sourceService;
 
-    @RequestMapping("/source/{sourceId}")
+    @RequestMapping("/{sourceId}")
     @ApiOperation(notes = "Get source Details Via Querying Source ID", value = "Source ID", httpMethod = "GET")
     public ResponseEntity<Source> querySource(@PathVariable @ApiParam Long sourceId) {
         if (validateQueryParams(sourceId)) {
@@ -30,7 +31,7 @@ public class SourceController {
         }
     }
 
-    @RequestMapping("/source/add")
+    @RequestMapping("/source")
     @ApiOperation(value = "Source", notes = "Add Source", httpMethod = "POST", protocols = "app")
     public ResponseEntity<Source> addSource(
             @RequestParam(name = "code") @ApiParam String code,

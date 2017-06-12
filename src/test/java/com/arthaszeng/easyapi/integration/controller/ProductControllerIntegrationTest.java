@@ -60,7 +60,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
 
         productRepository.save(product);
 
-        mockMvc.perform(get(format("http://localhost:8081/product/%d", product.getId())))
+        mockMvc.perform(get(format("http://localhost:8081/products/%d", product.getId())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(product.getId()))
                 .andExpect(jsonPath("productGroup").value(product.getProductGroup()))
@@ -82,7 +82,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
         source = sourceRepository.save(source);
 
         mockMvc.perform(post(
-                format("http://localhost:8081/product/add?productGroup=%s&sourceId=%d&categoryId=%d",
+                format("http://localhost:8081/products/product?productGroup=%s&sourceId=%d&categoryId=%d",
                         PROD_GROUP,
                         source.getSourceId(),
                         category.getCategoryId())))

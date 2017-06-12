@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
+@RequestMapping("products")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -26,7 +27,7 @@ public class ProductController {
     @Autowired
     private SourceService sourceService;
 
-    @RequestMapping("/product/{productId}")
+    @RequestMapping("/{productId}")
     @ApiOperation(notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
     public ResponseEntity<Product> queryProduct(@PathVariable @ApiParam Long productId) {
 
@@ -38,7 +39,7 @@ public class ProductController {
         }
     }
 
-    @RequestMapping("/product/add")
+    @RequestMapping("/product")
     @ApiOperation(value = "product", notes = "Add Product", httpMethod = "POST")
     public ResponseEntity<Product> addCategory(
             @RequestParam(name = "productGroup") @ApiParam String productGroup,

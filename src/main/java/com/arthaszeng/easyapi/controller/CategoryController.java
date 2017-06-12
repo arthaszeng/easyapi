@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
+@RequestMapping("/categories")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/category/{categoryId}")
+    @RequestMapping("/{categoryId}")
     @ApiOperation(notes = "Get Category Details Via Querying Category ID", value = "Category ID", httpMethod = "GET")
     public ResponseEntity<Category> queryCategory(@PathVariable @ApiParam Long categoryId) {
 
@@ -30,11 +31,11 @@ public class CategoryController {
         }
     }
 
-    @RequestMapping("/category/add")
+    @RequestMapping("/category")
     @ApiOperation(value = "Category", notes = "Add Category Details", httpMethod = "POST")
-    public ResponseEntity<Category> addCategory(@RequestParam(name = "description") @ApiParam String description,
-                                                @RequestParam @ApiParam("detailed description") String detailedDescription) {
-
+    public ResponseEntity<Category> addCategory(
+            @RequestParam(name = "description") @ApiParam String description,
+            @RequestParam @ApiParam("detailed description") String detailedDescription) {
 
         if (validateAddParams(description, detailedDescription)) {
             Category category = new Category(description, detailedDescription);
