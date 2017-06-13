@@ -1,5 +1,6 @@
 package com.arthaszeng.easyapi.integration;
 
+import com.google.gson.Gson;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -15,4 +16,9 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ActiveProfiles("local")
 public abstract class BaseIntegrationTest {
     protected MockMvc mockMvc;
+
+    public String toJson(Object object) {
+        Gson gson = new Gson();
+        return gson.toJson(object);
+    }
 }

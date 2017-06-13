@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -31,14 +28,11 @@ public class CategoryController {
         }
     }
 
-    @RequestMapping("/category")
-    @ApiOperation(value = "Category", notes = "Add Category Details", httpMethod = "POST")
-    public ResponseEntity<Category> addCategory(
-            @RequestParam(name = "description") @ApiParam String description,
-            @RequestParam @ApiParam("detailed description") String detailedDescription) {
 
-        if (validateAddParams(description, detailedDescription)) {
-            Category category = new Category(description, detailedDescription);
+    @RequestMapping(value = "/{category}", method = RequestMethod.POST)
+    @ApiOperation(value = "Category", notes = "Add Category Details", httpMethod = "POST")
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
+        if (validateAddParams(category)) {
             Category insertedCategory = categoryService.addCategory(category);
             return new ResponseEntity<>(insertedCategory, OK);
         } else {
@@ -46,8 +40,12 @@ public class CategoryController {
         }
     }
 
-    private boolean validateAddParams(String description, String detailedDescription) {
-        return description != null && detailedDescription != null;
+    private boolean validateAddParams(Category category) {
+        return category != null
+                && category.getDescription() != null
+                && category.getDetailedDescription() != null
+                && !category.getDescription().isEmpty()
+                && !category.getDetailedDescription().isEmpty();
     }
 
     private boolean validateQueryParams(Long categoryId) {

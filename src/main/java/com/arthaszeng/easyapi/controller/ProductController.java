@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -41,26 +38,20 @@ public class ProductController {
 
     @RequestMapping("/product")
     @ApiOperation(value = "product", notes = "Add Product", httpMethod = "POST")
-    public ResponseEntity<Product> addCategory(
-            @RequestParam(name = "productGroup") @ApiParam String productGroup,
-            @RequestParam(name = "sourceId") @ApiParam Long sourceId,
-            @RequestParam(name = "categoryId") @ApiParam Long categoryId) {
-
-        if (validateAddParams(productGroup, sourceId, categoryId)) {
-            Category category = categoryService.findCategoryByCategoryId(categoryId);
-            Source source = sourceService.findSourceBySourceId(sourceId);
-
-            Product product = new Product(productGroup, category, source);
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+        if (validateAddParams(product)) {
             Product insertedProduct = productService.addProduct(product);
-
             return new ResponseEntity<>(insertedProduct, OK);
         } else {
             return null;
         }
     }
 
-    private boolean validateAddParams(String productGroup, Long sourceId, Long categoryId) {
-        return productGroup != null && sourceId != null && categoryId != null && sourceId > 0 && categoryId > 0;
+    private boolean validateAddParams(Product product) {
+        return product.getProductGroup() != null
+                && product.getCategory() != null
+                && product.getSource() != null
+                && !product.getProductGroup().isEmpty();
     }
 
     private boolean validateQueryParams(Long productId) {

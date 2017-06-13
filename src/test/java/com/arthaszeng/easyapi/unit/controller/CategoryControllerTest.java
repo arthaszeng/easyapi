@@ -6,15 +6,12 @@ import com.arthaszeng.easyapi.service.category.CategoryService;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.arthaszeng.easyapi.unit.utils.POJOGenerator.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 public class CategoryControllerTest {
-    private static final long VALID_CATEGORY_ID = 1L;
-    private static final long INVALID_CATEGORY_ID = -1L;
-    private static final String DESCRIPTION = "TEST";
-    private static final String DETAILED_DESCRIPTION = "TEST";
 
     private CategoryController categoryController;
     private CategoryService categoryService;
@@ -23,7 +20,6 @@ public class CategoryControllerTest {
     public void setUp() throws Exception {
         categoryController = new CategoryController();
         categoryService = mock(CategoryService.class);
-
         setField(categoryController, "categoryService", categoryService);
     }
 
@@ -44,14 +40,15 @@ public class CategoryControllerTest {
 
     @Test
     public void shouldInvokeServiceToAddCategoryWhenParamsAreValid() throws Exception {
-        categoryController.addCategory(DESCRIPTION, DETAILED_DESCRIPTION);
+        categoryController.addCategory(validCategory());
 
         verify(categoryService, times(1)).addCategory(any(Category.class));
     }
 
     @Test
     public void shouldNotInvokeServiceToAddCategoryWhenParamsAreInvalid() throws Exception {
-        categoryController.addCategory(null, null);
+        categoryController.addCategory(invalideCategoryWithNullField());
+        categoryController.addCategory(invalideCategoryWithEmpty());
 
         verify(categoryService, times(0)).addCategory(any(Category.class));
     }

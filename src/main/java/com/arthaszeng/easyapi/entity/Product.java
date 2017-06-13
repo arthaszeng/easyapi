@@ -1,5 +1,7 @@
 package com.arthaszeng.easyapi.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +10,7 @@ public class Product {
 
     @Id
     @GeneratedValue
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     @Column(name = "product_group")

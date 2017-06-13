@@ -11,6 +11,7 @@ import com.arthaszeng.easyapi.repository.SourceRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -78,14 +79,12 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
         category = new Category(CAT_DESCRIPTION, CAT_DET_DESC);
         source = new Source(CODE, CODE_DESC);
 
-        category = categoryRepository.save(category);
-        source = sourceRepository.save(source);
+        categoryRepository.save(category);
+        sourceRepository.save(source);
 
-        mockMvc.perform(post(
-                format("http://localhost:8081/products/product?productGroup=%s&sourceId=%d&categoryId=%d",
-                        PROD_GROUP,
-                        source.getSourceId(),
-                        category.getCategoryId())))
+        mockMvc.perform(post("http://localhost:8081/products/product")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(toJson(new Product(PROD_GROUP, category, source))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("productGroup").value(PROD_GROUP))
                 .andExpect(jsonPath("category.categoryId").value(category.getCategoryId()))

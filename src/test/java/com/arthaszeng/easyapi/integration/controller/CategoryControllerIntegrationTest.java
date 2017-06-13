@@ -7,6 +7,7 @@ import com.arthaszeng.easyapi.repository.CategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static java.lang.String.format;
@@ -14,7 +15,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
     @Autowired
@@ -44,7 +44,10 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     public void shouldAddCategory() throws Exception {
 
-        mockMvc.perform(post(format("http://localhost:8081/categories/category?description=%s&detailedDescription=%s", DESCRIPTION, DETAILED_DESCRIPTION)))
+        mockMvc.perform(
+                post("http://localhost:8081/categories/category")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(new Category(DESCRIPTION, DETAILED_DESCRIPTION))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("description").value(DESCRIPTION))
                 .andExpect(jsonPath("detailedDescription").value(DETAILED_DESCRIPTION));

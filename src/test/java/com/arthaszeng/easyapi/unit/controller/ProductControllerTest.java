@@ -1,33 +1,32 @@
 package com.arthaszeng.easyapi.unit.controller;
 
 import com.arthaszeng.easyapi.controller.ProductController;
+import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
+import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.service.category.CategoryService;
 import com.arthaszeng.easyapi.service.product.ProductService;
 import com.arthaszeng.easyapi.service.sourceService.SourceService;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.arthaszeng.easyapi.unit.utils.POJOGenerator.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 public class ProductControllerTest {
-    private static final long VALID_PRODUCT_ID = 1L;
-    private static final long INVALID_PRODUCT_ID = -1L;
-    private static final Long SOURCE_ID = 1L;
-    private static final Long CATEGORY_ID = 1L;
-    private static final Long INVALID_ID = -1L;
-    private static final String PRODUCT_GROUP = "TEST";
 
     private ProductController productController;
     private ProductService productService;
     private SourceService sourceService;
     private CategoryService categoryService;
+    private Product product;
 
     @Before
     public void setUp() throws Exception {
         productController = new ProductController();
+        product = new Product(PRODUCT_GROUP, new Category("", ""), new Source("", ""));
 
         categoryService = mock(CategoryService.class);
         sourceService = mock(SourceService.class);
@@ -52,41 +51,35 @@ public class ProductControllerTest {
         verify(productService, times(0)).findCategoryByProductId(any());
     }
 
-
     @Test
-    public void shouldInvokeServiceToAddCategoryWhenParamsAreValid() throws Exception {
-        productController.addCategory(PRODUCT_GROUP, SOURCE_ID, CATEGORY_ID);
+    public void shouldInvokeServiceToAddProductWhenParamsAreValid() throws Exception {
+        productController.addProduct(product);
 
-        verify(categoryService, times(1)).findCategoryByCategoryId(CATEGORY_ID);
-        verify(sourceService, times(1)).findSourceBySourceId(SOURCE_ID);
         verify(productService, times(1)).addProduct(any(Product.class));
     }
 
     @Test
-    public void shouldNotInvokeServiceToAddCategoryWhenProductGroupIsInvalid() throws Exception {
-        productController.addCategory(null, SOURCE_ID, CATEGORY_ID);
+    public void shouldNotInvokeServiceToAddProductWhenProductGroupIsInvalid() throws Exception {
+        productController.addProduct(invalidProductWithInvalidProductGroup());
 
-        verify(categoryService, times(0)).findCategoryByCategoryId(any());
-        verify(sourceService, times(0)).findSourceBySourceId(any());
         verify(productService, times(0)).addProduct(any());
     }
 
     @Test
-    public void shouldNotInvokeServiceToAddCategoryWhenSourceIdIsInvalid() throws Exception {
-        productController.addCategory(PRODUCT_GROUP, INVALID_ID, CATEGORY_ID);
+    public void shouldNotInvokeServiceToAddProductWhenSourceIsInvalid() throws Exception {
+        productController.addProduct(invalidProductWithInvalidSource());
 
-        verify(categoryService, times(0)).findCategoryByCategoryId(any());
-        verify(sourceService, times(0)).findSourceBySourceId(any());
         verify(productService, times(0)).addProduct(any());
     }
 
     @Test
-    public void shouldNotInvokeServiceToAddCategoryWhenCategoryIdIsInvalid() throws Exception {
-        productController.addCategory(PRODUCT_GROUP, SOURCE_ID, INVALID_ID);
+    public void shouldNotInvokeServiceToAddProductWhenCategoryIsInvalid() throws Exception {
+        productController.addProduct(invalidProductWithInvalidCategory());
 
         verify(categoryService, times(0)).findCategoryByCategoryId(any());
         verify(sourceService, times(0)).findSourceBySourceId(any());
         verify(productService, times(0)).addProduct(any());
     }
+
 
 }

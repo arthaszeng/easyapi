@@ -6,6 +6,7 @@ import com.arthaszeng.easyapi.service.sourceService.SourceService;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.arthaszeng.easyapi.unit.utils.POJOGenerator.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
@@ -13,11 +14,6 @@ import static org.springframework.test.util.ReflectionTestUtils.setField;
 public class SourceControllerTest {
     private SourceController sourceController;
     private SourceService sourceService;
-
-    private static final long VALID_SOURCE_ID = 1L;
-    private static final long INVALID_SOURCE_ID = -1L;
-    private static final String DESCRIPTION = "TEST";
-    private static final String CODE = "1234";
 
     @Before
     public void setUp() throws Exception {
@@ -41,19 +37,17 @@ public class SourceControllerTest {
         verify(sourceService, times(0)).findSourceBySourceId(any());
     }
 
-
     @Test
     public void shouldInvokeServiceToAddSourceWhenParamsAreValid() throws Exception {
-        sourceController.addSource(DESCRIPTION, CODE);
+        sourceController.addSource(valideSource());
 
         verify(sourceService, times(1)).addSource(any(Source.class));
     }
 
     @Test
     public void shouldNotInvokeServiceToAddSourceWhenParamsAreInvalid() throws Exception {
-        sourceController.addSource(null, null);
+        sourceController.addSource(invalidSource());
 
         verify(sourceService, times(0)).addSource(any(Source.class));
     }
-
 }

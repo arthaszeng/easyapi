@@ -1,5 +1,9 @@
 package com.arthaszeng.easyapi.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
+
 import javax.persistence.*;
 
 
@@ -9,6 +13,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @ApiModelProperty(hidden = true)
     private Long categoryId;
 
     private String description;

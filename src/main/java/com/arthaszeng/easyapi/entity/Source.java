@@ -1,5 +1,7 @@
 package com.arthaszeng.easyapi.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 
@@ -9,6 +11,7 @@ public class Source {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @ApiModelProperty(hidden = true)
     private Long sourceId;
 
     private String code;

@@ -7,6 +7,7 @@ import com.arthaszeng.easyapi.repository.SourceRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -46,7 +47,10 @@ public class SourceControllerIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void shouldAddSource() throws Exception {
-        mockMvc.perform(post(format("http://localhost:8081/sources/source?code=%s&description=%s", CODE, DESCRIPTION)))
+
+        mockMvc.perform(post("http://localhost:8081/sources/source")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(toJson(new Source(CODE, DESCRIPTION))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("code").value(CODE))
                 .andExpect(jsonPath("description").value(DESCRIPTION));
