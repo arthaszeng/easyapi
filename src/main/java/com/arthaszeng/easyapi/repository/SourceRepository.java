@@ -11,10 +11,4 @@ import java.util.List;
 
 @Repository
 public interface SourceRepository extends CrudRepository<Source, Long> {
-
-    @Transactional(readOnly = true)
-    Source findBySourceId(Long sourceId);
-
-    @Transactional(rollbackFor = {DatabaseException.class})
-    Source save(Source source);
 }

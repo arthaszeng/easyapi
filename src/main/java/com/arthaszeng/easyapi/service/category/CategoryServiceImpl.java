@@ -12,7 +12,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findCategoryByCategoryId(Long categoryId) {
-        return categoryRepository.findByCategoryId(categoryId);
+        return categoryRepository.findOne(categoryId);
     }
 
     @Override

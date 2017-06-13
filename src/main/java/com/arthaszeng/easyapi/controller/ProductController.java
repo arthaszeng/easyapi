@@ -1,11 +1,7 @@
 package com.arthaszeng.easyapi.controller;
 
-import com.arthaszeng.easyapi.entity.Category;
 import com.arthaszeng.easyapi.entity.Product;
-import com.arthaszeng.easyapi.entity.Source;
-import com.arthaszeng.easyapi.service.category.CategoryService;
 import com.arthaszeng.easyapi.service.product.ProductService;
-import com.arthaszeng.easyapi.service.sourceService.SourceService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +15,13 @@ import static org.springframework.http.HttpStatus.OK;
 public class ProductController {
     @Autowired
     private ProductService productService;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private SourceService sourceService;
 
     @RequestMapping("/{productId}")
     @ApiOperation(notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
     public ResponseEntity<Product> queryProduct(@PathVariable @ApiParam Long productId) {
 
         if (validateQueryParams(productId)) {
-            Product product = productService.findCategoryByProductId(productId);
+            Product product = productService.findProductById(productId);
             return new ResponseEntity<>(product, OK);
         } else {
             return null;

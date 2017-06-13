@@ -10,11 +10,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
-
-    @Transactional(readOnly = true)
-    Product findProductById(Long id);
-
-    @Transactional(rollbackFor = {DatabaseException.class})
-    Product save(Product product);
 }
 

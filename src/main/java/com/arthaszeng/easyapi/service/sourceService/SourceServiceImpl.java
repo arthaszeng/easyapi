@@ -12,7 +12,7 @@ public class SourceServiceImpl implements SourceService {
 
     @Override
     public Source findSourceBySourceId(Long sourceId) {
-        return sourceRepository.findBySourceId(sourceId);
+        return sourceRepository.findOne(sourceId);
     }
 
     @Override

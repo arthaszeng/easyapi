@@ -46,7 +46,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void shouldQueryAProductById() throws Exception {
-        Product result = productService.findCategoryByProductId(product.getId());
+        Product result = productService.findProductById(product.getId());
 
         assertThat(result.equals(product), is(true));
     }
@@ -61,7 +61,7 @@ public class ProductServiceImplTest {
         sourceService.addSource(source);
         productService.addProduct(product);
 
-        Product insertedProduct = productService.findCategoryByProductId(product.getId());
+        Product insertedProduct = productService.findProductById(product.getId());
 
         assertThat(insertedProduct.equals(product), is(true));
     }

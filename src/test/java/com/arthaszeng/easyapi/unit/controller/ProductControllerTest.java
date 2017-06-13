@@ -33,22 +33,20 @@ public class ProductControllerTest {
         productService = mock(ProductService.class);
 
         setField(productController, "productService", productService);
-        setField(productController, "categoryService", categoryService);
-        setField(productController, "sourceService", sourceService);
     }
 
     @Test
     public void shouldInvokeServiceToQueryProductWhenIdIsValid() throws Exception {
         productController.queryProduct(VALID_PRODUCT_ID);
 
-        verify(productService, times(1)).findCategoryByProductId(VALID_PRODUCT_ID);
+        verify(productService, times(1)).findProductById(VALID_PRODUCT_ID);
     }
 
     @Test
     public void shouldNotInvokeServiceToQueryCategoryWhenIdIsInvalid() throws Exception {
         productController.queryProduct(INVALID_PRODUCT_ID);
 
-        verify(productService, times(0)).findCategoryByProductId(any());
+        verify(productService, times(0)).findProductById(any());
     }
 
     @Test

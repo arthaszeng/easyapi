@@ -37,7 +37,7 @@ public class CustomerRepositoryTests {
         product.setSource(source);
         entityManager.persist(product);
 
-        Product selectedProduct = customers.findProductById(product.getId());
+        Product selectedProduct = customers.findOne(product.getId());
 
         assertThat(selectedProduct).isEqualTo(product.getId());
     }
