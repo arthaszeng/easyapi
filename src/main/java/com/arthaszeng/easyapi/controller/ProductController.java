@@ -36,7 +36,7 @@ public class ProductController {
         }
     }
 
-    @RequestMapping("/product")
+    @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value = "product", notes = "Add Product", httpMethod = "POST")
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         if (validateAddParams(product)) {

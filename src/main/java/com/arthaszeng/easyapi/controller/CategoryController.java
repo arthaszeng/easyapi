@@ -29,7 +29,7 @@ public class CategoryController {
     }
 
 
-    @RequestMapping(value = "/{category}", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value = "Category", notes = "Add Category Details", httpMethod = "POST")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         if (validateAddParams(category)) {

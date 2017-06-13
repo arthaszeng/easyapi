@@ -7,11 +7,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -20,7 +18,7 @@ public class SourceController {
     @Autowired
     private SourceService sourceService;
 
-    @RequestMapping("/{sourceId}")
+    @RequestMapping(value = "/{sourceId}", method = RequestMethod.GET)
     @ApiOperation(notes = "Get source Details Via Querying Source ID", value = "Source ID", httpMethod = "GET")
     public ResponseEntity<Source> querySource(@PathVariable @ApiParam Long sourceId) {
         if (validateQueryParams(sourceId)) {
@@ -31,7 +29,7 @@ public class SourceController {
         }
     }
 
-    @RequestMapping("/source")
+    @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value = "Source", notes = "Add Source", httpMethod = "POST", protocols = "app")
     public ResponseEntity<Source> addSource(@RequestBody Source source) throws DatabaseException {
         if (validateAddParams(source)) {

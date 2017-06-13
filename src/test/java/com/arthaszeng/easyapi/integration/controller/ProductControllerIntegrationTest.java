@@ -82,7 +82,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
         categoryRepository.save(category);
         sourceRepository.save(source);
 
-        mockMvc.perform(post("http://localhost:8081/products/product")
+        mockMvc.perform(post("http://localhost:8081/products")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(toJson(new Product(PROD_GROUP, category, source))))
                 .andExpect(status().isOk())

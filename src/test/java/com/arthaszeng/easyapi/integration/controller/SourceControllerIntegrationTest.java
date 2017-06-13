@@ -48,7 +48,7 @@ public class SourceControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     public void shouldAddSource() throws Exception {
 
-        mockMvc.perform(post("http://localhost:8081/sources/source")
+        mockMvc.perform(post("http://localhost:8081/sources")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(toJson(new Source(CODE, DESCRIPTION))))
                 .andExpect(status().isOk())

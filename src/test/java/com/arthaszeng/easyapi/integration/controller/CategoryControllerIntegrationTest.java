@@ -45,7 +45,7 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
     public void shouldAddCategory() throws Exception {
 
         mockMvc.perform(
-                post("http://localhost:8081/categories/category")
+                post("http://localhost:8081/categories")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(new Category(DESCRIPTION, DETAILED_DESCRIPTION))))
                 .andExpect(status().isOk())
