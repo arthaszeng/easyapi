@@ -16,7 +16,7 @@ public class Product {
     @Column(name = "product_group")
     private String productGroup;
 
-    @OneToOne(targetEntity=Category.class)
+    @OneToOne(targetEntity = Category.class)
     @JoinColumn(name = "category_id")
     private Category category;
 

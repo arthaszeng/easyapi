@@ -1,8 +1,8 @@
 package com.arthaszeng.easyapi.service.sourceService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import com.arthaszeng.easyapi.entity.Source;
 import com.arthaszeng.easyapi.repository.SourceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
