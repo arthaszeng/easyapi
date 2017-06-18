@@ -11,7 +11,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
-public class CategoryControllerTest {
+public class categoryControllerTest {
 
     private CategoryController categoryController;
     private CategoryService categoryService;

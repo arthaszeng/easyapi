@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
+public class categoryControllerIntegrationTest extends BaseIntegrationTest {
     @Autowired
     private CategoryController categoryController;
 
