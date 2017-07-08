@@ -16,23 +16,47 @@ import java.util.UUID;
 import static org.springframework.http.HttpHeaders.USER_AGENT;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/qrcode")
 public class QRCoderController {
-    private static final String FETCH_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxfd65148b63fb1c13&secret=3b10c329e0c5f2874f53eab5ccf0a792";
+//    private static final String FETCH_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxfd65148b63fb1c13&secret=3b10c329e0c5f2874f53eab5ccf0a792";
+    private static final String FETCH_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1308670b4c3b323a&secret=93fd49edfcf1e57d4a28cb5e0bd0fe2d";
     private static final String URL_PREFIX = "http://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=";
     private static final String FOLDER_PATH_PREFIX = "/Users/cwzeng/Documents/QRCode/";
     private String folderPath;
     private String token;
 
-    @RequestMapping("/code")
-    @ApiOperation(notes = "Create a batch of QR Type B Codes", value = "number", httpMethod = "GET")
-    public String createQRCode(@RequestParam @ApiParam String number) throws Exception {
-        createFolder();
+    @RequestMapping("/single")
+    @ApiOperation(notes = "Create a batch of QR subcodes", value = "number", httpMethod = "GET")
+    public String createSingleQRCodes(@RequestParam @ApiParam int number) throws Exception {
+        createFolder(FOLDER_PATH_PREFIX + new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        getToken();
+        if (validate(number, 1)) {
+            for (int i = 0; i < number; i++) {
+                generateSubCodes(generateShortUuid(), generateShortUuid());
+            }
+            return "Ok";
+        } else {
+            return "Wrong parameters: number";
+        }
+    }
+
+    @RequestMapping("/mixed")
+    @ApiOperation(notes = "Create parent codes and subcodes", value = "number", httpMethod = "GET")
+    public String createMixedQRCodes(@RequestParam @ApiParam int numOfParents, @RequestParam @ApiParam int scale) throws Exception {
+        String topPath = FOLDER_PATH_PREFIX + new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+        createFolder(topPath);
         getToken();
 
-        if (validate(number)) {
-            for (int i = 0; i < Integer.valueOf(number); i++) {
-                generateCodes();
+        if (validate(numOfParents, scale)) {
+            for (int i = 0; i < numOfParents; i++) {
+                String parentId = generateShortUuid();
+                createFolder(topPath + "/" + String.valueOf(i));
+                generateSubCodes(parentId, parentId);
+                for (int y = 0; y < scale; y++) {
+                    String subId = generateShortUuid();
+                    generateSubCodes(parentId, subId);
+                }
             }
             return "Ok";
         } else {
@@ -51,9 +75,8 @@ public class QRCoderController {
         return outStream.toByteArray();
     }
 
-    private void generateCodes() throws Exception {
-        String codeId = generateCodeId();
-        sendPost(getUrl(), codeId);
+    private void generateSubCodes(String subId, String parentId) throws Exception {
+        sendPost(getUrl(), subId, parentId);
     }
 
     private String getUrl() throws Exception {
@@ -61,7 +84,9 @@ public class QRCoderController {
     }
 
     private void getToken() throws Exception {
-        token = sendGet();
+        System.out.println("Start fetch token");
+        token = sendGet().split(",")[0].split(":")[1].replace("\"", "");
+        System.out.println("get token: " + token);
     }
 
     private String sendGet() throws Exception {
@@ -72,24 +97,24 @@ public class QRCoderController {
 
         con.setRequestProperty("User-Agent", USER_AGENT);
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
 
-        while ((inputLine = in.readLine()) != null) {
+        while ((inputLine = reader.readLine()) != null) {
             response.append(inputLine);
         }
-        in.close();
+        reader.close();
 
         System.out.println(response.toString());
         return response.toString();
     }
 
-    private String getDataJSON(String id) {
-        return "{\n\"scene\":\"" + id + "\"\n}";
+    private String getDataJSON(String subId, String parentId) {
+        return "{\n\"scene\":\"" + subId + "_" + parentId + "\"\n}";
     }
 
-    private void sendPost(String urlStr, String id) throws Exception {
+    private void sendPost(String urlStr, String subId, String parentId) throws Exception {
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(5000);
@@ -98,13 +123,14 @@ public class QRCoderController {
         conn.setDoInput(true);
         conn.setRequestMethod("POST");
 
-        String dataJSON = getDataJSON(id);
+        String dataJSON = getDataJSON(subId, parentId);
         OutputStream os = conn.getOutputStream();
         os.write(dataJSON.getBytes("UTF-8"));
         os.close();
 
+        String fileName = subId + "_" + parentId;
         InputStream inStream = conn.getInputStream();
-        saveFile(id, inStream);
+        saveFile(fileName, inStream);
     }
 
     private void saveFile(String id, InputStream inStream) throws Exception {
@@ -116,9 +142,7 @@ public class QRCoderController {
         outStream.close();
     }
 
-    private void createFolder() {
-        Date date = new Date();
-        String path = FOLDER_PATH_PREFIX + new SimpleDateFormat("yyyy/MM/dd").format(date);
+    private void createFolder(String path) {
         File folder = new File(path);
         if (!folder.exists())
             folder.mkdirs();
@@ -129,7 +153,26 @@ public class QRCoderController {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-    private boolean validate(String number) {
-        return Integer.valueOf(number) > 0;
+    private boolean validate(int parentNum, int scale) {
+        return parentNum > 0 && scale > 0;
+    }
+
+    private static String[] chars = new String[] { "a", "b", "c", "d", "e", "f",
+            "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+            "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",
+            "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
+            "W", "X", "Y", "Z" };
+
+
+    public static String generateShortUuid() {
+        StringBuffer shortBuffer = new StringBuffer();
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        for (int i = 0; i < 8; i++) {
+            String str = uuid.substring(i * 4, i * 4 + 4);
+            int x = Integer.parseInt(str, 16);
+            shortBuffer.append(chars[x % 0x3E]);
+        }
+        return shortBuffer.toString();
     }
 }
