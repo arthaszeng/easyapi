@@ -16,6 +16,8 @@ public class SwaggerConfig {
     @Bean
     public Docket createSwaggerConfig() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .host("localhost")
+                .pathMapping("/swagger/api-docs")
                 .ignoredParameterTypes()
                 .apiInfo(apiInfo())
                 .select()

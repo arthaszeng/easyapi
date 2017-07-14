@@ -18,6 +18,12 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'net.saliman.cobertura'
 apply plugin: 'checkstyle'
 
+
+jar {
+    baseName = 'easyapi'
+    version = '1.0.0'
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
