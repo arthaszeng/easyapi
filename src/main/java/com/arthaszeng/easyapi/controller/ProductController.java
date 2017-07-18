@@ -2,6 +2,7 @@ package com.arthaszeng.easyapi.controller;
 
 import com.arthaszeng.easyapi.entity.Product;
 import com.arthaszeng.easyapi.service.product.ProductService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping("/{productId}")
+    @JsonProperty
     @ApiOperation(notes = "Get Product Details Via Querying Product ID", value = "Product ID", httpMethod = "GET")
     public ResponseEntity<Product> queryProduct(@PathVariable @ApiParam Long productId) {
 
