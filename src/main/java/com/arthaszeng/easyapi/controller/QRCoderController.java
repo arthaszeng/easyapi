@@ -18,7 +18,7 @@ import static org.springframework.http.HttpHeaders.USER_AGENT;
 @RestController
 @RequestMapping("/qrcode")
 public class QRCoderController {
-//        private static final String FETCH_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxfd65148b63fb1c13&secret=3b10c329e0c5f2874f53eab5ccf0a792";
+    //        private static final String FETCH_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxfd65148b63fb1c13&secret=3b10c329e0c5f2874f53eab5ccf0a792";
     private static final String FETCH_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1308670b4c3b323a&secret=93fd49edfcf1e57d4a28cb5e0bd0fe2d";
     private static final String URL_WX_CODE_PREFIX = "http://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=";
     private static final String URL_QR_CODE_PREFIX = "https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=";
@@ -174,8 +174,9 @@ public class QRCoderController {
 
     private void createFolder(String path) {
         File folder = new File(path);
-        if (!folder.exists())
+        if (!folder.exists()) {
             folder.mkdirs();
+        }
         folderPath = path + "/";
     }
 

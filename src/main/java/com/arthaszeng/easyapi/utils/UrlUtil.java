@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
  * @date 2015-3-17 下午04:09:35
  */
 public class UrlUtil {
-    private final static String ENCODE = "UTF-8";
+    private static final String ENCODE = "UTF-8";
 
     public static String getURLDecoderString(String str) {
         String result = "";
