@@ -34,6 +34,11 @@ repositories {
 
 dependencies {
     compile("cn.leancloud:java-sdk:0.1.6")
+//    compile gourp: 'org.apache.httpcomponents', name: 'httpclient', version: '4.2.1'
+//    compile gourp: 'org.apache.httpcomponents', name: 'httpcore', version: '4.2.1'
+    // https://mvnrepository.com/artifact/commons-lang/commons-lang
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+
 
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '1.4.2.RELEASE'
